@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anant Pratap Singh | Professional Portfolio</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --accent-color: #f59e0b; /* Premium Cyber-Gold */
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --gradient: linear-gradient(135deg, #f59e0b, #d97706);
+            --border-color: #1f2937;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a.active-nav, .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* MULTI-PAGE ARCHITECTURE ENGINE */
+        .page-view {
+            display: none;
+            flex-grow: 1;
+            padding: 8rem 2rem 4rem 2rem;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .page-view.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            margin: 12px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* PAGE 1: HOME PAGE HERO, BANNER, SKILLS & REVIEWS */
+        .banner-container {
+            width: 100%;
+            height: 380px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            margin-bottom: 3.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .banner-slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slide 12s infinite ease-in-out;
+        }
+
+        .slide {
+            width: 33.333%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide1 { background: linear-gradient(rgba(11,15,25,0.75), rgba(11,15,25,0.75)), url('https://picsum.photos/1200/400?v=1'); }
+        .slide2 { background: linear-gradient(rgba(11,15,25,0.75), rgba(11,15,25,0.75)), url('https://picsum.photos/1200/400?v=2'); }
+        .slide3 { background: linear-gradient(rgba(11,15,25,0.75), rgba(11,15,25,0.75)), url('https://picsum.photos/1200/400?v=3'); }
+
+        .slide-text {
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        @keyframes slide {
+            0%, 25% { transform: translateX(0); }
+            33%, 58% { transform: translateX(-33.333%); }
+            66%, 91% { transform: translateX(-66.666%); }
+            100% { transform: translateX(0); }
+        }
+
+        .hero-intro {
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .hero-intro h1 {
+            font-size: 3.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-address {
+            color: var(--accent-color);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-intro p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            line-height: 1.8;
+        }
+
+        /* TECHNICAL SKILLS DASHBOARD ON HOME */
+        .home-skills-panel {
+            width: 100%;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 4rem;
+            text-align: left;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.05);
+        }
+
+        .skill-category-card h4 {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* REVIEWS LAYOUT SYSTEM */
+        .home-reviews-section {
+            width: 100%;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 4rem;
+            text-align: left;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .review-stars {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .review-card p {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .review-author {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .review-author h5 {
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .review-author span {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* CARD SKILLS INTERNAL BADGES */
+        .inline-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .inline-badges .skill-badge {
+            margin-top: 0;
+            font-size: 0.8rem;
+            padding: 0.4rem 0.9rem;
+        }
+
+        /* PAGE 2: ABOUT ME LOOKS */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-card {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .about-card h3 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-card ul {
+            list-style: none;
+            color: var(--text-muted);
+        }
+
+        .about-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .about-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .skill-badge {
+            background: #1f2937;
+            color: #fff;
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .skill-badge:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            background-color: var(--accent-glow);
+        }
+
+        /* PAGE 3: PORTFOLIO TABS & GALLERIES */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.8rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--gradient);
+            border-color: transparent;
+            color: #000;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            display: none;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .portfolio-item.show {
+            display: block;
+        }
+
+        .item-img {
+            width: 100%;
+            height: 220px;
+            background-color: #1f2937;
+            object-fit: cover;
+        }
+
+        .item-info {
+            padding: 1.5rem;
+        }
+
+        .item-info h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .item-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* PAGE 4: CONTACT FORMS */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .info-link {
+            display: inline-block;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            transition: opacity 0.3s;
+        }
+
+        .info-link:hover {
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background-color: var(--card-bg);
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: transparent;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: #000;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: opacity 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.95;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .nav-links { gap: 1rem; }
+            .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem;}
+            .banner-container { height: 220px; }
+            .hero-intro h1 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-container">
+            <div class="logo" onclick="navigateToPage('home')">Anant Pratap Singh</div>
+            <ul class="nav-links">
+                <li><a id="nav-home" class="active-nav" onclick="navigateToPage('home')">Home</a></li>
+                <li><a id="nav-about" onclick="navigateToPage('about')">About Me</a></li>
+                <li><a id="nav-portfolio" onclick="navigateToPage('portfolio')">Portfolio</a></li>
+                <li><a id="nav-contact" onclick="navigateToPage('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- PAGE 1: HOME VIEW -->
+    <div id="page-home" class="page-view active-page">
+        <div class="banner-container">
+            <div class="banner-slider">
+                <div class="slide slide1">
+                    <div class="slide-text">Creative Graphic Design</div>
+                </div>
+                <div class="slide slide2">
+                    <div class="slide-text">High Quality Video Editing & VFX</div>
+                </div>
+                <div class="slide slide3">
+                    <div class="slide-text">2D Animation & Motion Dynamics</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-intro">
+            <h1>Hi, I'm <span style="color: var(--accent-color);">Anant Pratap Singh</span></h1>
+            <div class="hero-address">📍 P-19, Private Block, Sriniwaspuri, New Delhi - 110065</div>
+            <p>Specializing in Skill Graphics, 2D Animation, Premium Video Editing, VFX, and Motion Graphics. Combining structural design mechanics with digital aesthetics to bring narratives to life.</p>
+            
+            <!-- NEW HOME PAGE SKILLS PANEL -->
+            <div class="home-skills-panel">
+                <h3 style="font-size: 1.8rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 0.5rem;">Core Technical Suite</h3>
+                <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem;">A breakdown of production engines and creative software pipelines deployed to build assets.</p>
+                
+                <div class="skills-grid">
+                    <div class="skill-category-card">
+                        <h4>🎨 Graphic Architecture</h4>
+                        <div class="inline-badges">
+                            <span class="skill-badge">Photoshop</span>
+                            <span class="skill-badge">Adobe Illustrator</span>
+                            <span class="skill-badge">InDesign</span>
+                            <span class="skill-badge">Vector Branding</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category-card">
+                        <h4>🎬 Post-Production</h4>
+                        <div class="inline-badges">
+                            <span class="skill-badge">Premiere Pro</span>
+                            <span class="skill-badge">Timeline Mastering</span>
+                            <span class="skill-badge">Sound Curves</span>
+                            <span class="skill-badge">Multi-Cam Sync</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h4>✨ Motion & VFX</h4>
+                        <div class="inline-badges">
+                            <span class="skill-badge">After Effects</span>
+                            <span class="skill-badge">VFX Compositing</span>
+                            <span class="skill-badge">Rotoscoping</span>
+                            <span class="skill-badge">Alpha Channels</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <h4>✏️ 2D Dynamics</h4>
+                        <div class="inline-badges">
+                            <span class="skill-badge">Animate CC</span>
+                            <span class="skill-badge">Run Cycles</span>
+                            <span class="skill-badge">Kinetic Type</span>
+                            <span class="skill-badge">Posturing Maps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOME PAGE REVIEWS AREA -->
+            <div class="home-reviews-section">
+                <h3 style="font-size: 1.8rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 0.5rem;">Client Reviews & Recommendations</h3>
+                <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem;">Direct assessments from brand production pipelines and agency partnerships regarding project delivery metrics.</p>
+                
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p>"Anant completely transformed our brand assets for the 2026 framework launch. His structural design layouts and sharp vector distributions were meticulously engineered. The precision in matching our strict identity parameters across layout arrays was incredibly reassuring. Absolute professional execution!"</p>
+                        <div class="review-author">
+                            <h5>Managing Director</h5>
+                            <span>abcd Brand</span>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p>"The post-production output delivered by Anant exceeded our benchmark requirements. His motion vectors, 2D presentation rendering loops, and complex technical matte filters inside After Effects were flawless. Turnaround speeds were incredibly fast without sacrificing frame stability or clip sound balance metrics."</p>
+                        <div class="review-author">
+                            <h5>Lead Producer</h5>
+                            <span>Nexus Creative Labs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: ABOUT VIEW -->
+    <div id="page-about" class="page-view">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Detailed Profile</h3>
+                <p>I am a dedicated multimedia artist and designer specializing in creating immersive 2D content, structural graphic identity files, and clean cinematic frame compositions. I focus on technical accuracy and efficient post-production execution pipelines.</p>
+                <br>
+                <h3>Academic Qualifications</h3>
+                <ul>
+                    <li><strong>Multimedia Arts & Design Foundations</strong></li>
+                </ul>
+            </div>
+
+            <div class="about-card">
+                <h3>Technical Suite & Tools</h3>
+                <p style="margin-bottom: 1rem;">Proficient in industry-standard creation engines and asset layouts:</p>
+                <div class="skills-container">
+                    <span class="skill-badge">Photoshop</span>
+                    <span class="skill-badge">Adobe Illustrator</span>
+                    <span class="skill-badge">After Effects</span>
+                    <span class="skill-badge">Premiere Pro</span>
+                    <span class="skill-badge">InDesign</span>
+                    <span class="skill-badge">Animate CC</span>
+                    <span class="skill-badge">VFX Compositing</span>
+                    <span class="skill-badge">Motion Graphics</span>
+                </div>
+                <br>
+                <h3>Project & Freelance Experience</h3>
+                <ul>
+                    <li><strong>Freelance Logo Design Execution</strong> for <em>abcd Brand</em> (Year 2026)</li>
+                </ul>
+                <br>
+                <h3>Achievements</h3>
+                <ul>
+                    <li>Recipient of the <strong>Best Student Award</strong></li>
+                    <li>Honored with the <strong>Emerging Graphics Designer Award</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: PORTFOLIO VIEW -->
+    <div id="page-portfolio" class="page-view">
+        <h2 class="section-title">My Portfolio Gallery</h2>
+        
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="filterPortfolio('all')">All Assets</button>
+            <button class="tab-btn" onclick="filterPortfolio('graphics')">Graphics & Logos</button>
+            <button class="tab-btn" onclick="filterPortfolio('animation')">Animation & Motion</button>
+            <button class="tab-btn" onclick="filterPortfolio('vfx')">VFX & Video</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item show graphics">
+                <img src="https://picsum.photos/400/300?v=21" class="item-img" alt="abcd Brand Logo">
+                <div class="item-info">
+                    <h4>abcd Brand Identity Layout</h4>
+                    <p>Clean structural vector configuration engineered during the fiscal project year 2026.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show animation">
+                <img src="https://picsum.photos/400/300?v=22" class="item-img" alt="2D Character Run Cycle">
+                <div class="item-info">
+                    <h4>2D Motion Dynamics Frame</h4>
+                    <p>Smooth asset configurations made inside Adobe Animate using classic clean pacing principles.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show vfx">
+                <img src="https://picsum.photos/400/300?v=23" class="item-img" alt="Matte Painting VFX Frame">
+                <div class="item-info">
+                    <h4>Cinematic Compositing Array</h4>
+                    <p>Multi-layered camera movement frame tracks using clean After Effects alpha channels.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show graphics">
+                <img src="https://picsum.photos/400/300?v=24" class="item-img" alt="InDesign Brochure Spread">
+                <div class="item-info">
+                    <h4>InDesign Magazine System</h4>
+                    <p>Typography maps, grid systems, alignments, and high-impact baseline print tracking layouts.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show animation">
+                <img src="https://picsum.photos/400/300?v=25" class="item-img" alt="Typographic Kinetic Intro">
+                <div class="item-info">
+                    <h4>Kinetic Typography Segment</h4>
+                    <p>Complex expressions built to deliver fast, highly communicative layout arrays.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show vfx">
+                <img src="https://picsum.photos/400/300?v=26" class="item-img" alt="Color Grading Pipeline Showcase">
+                <div class="item-info">
+                    <h4>Premiere Sequence Render</h4>
+                    <p>Advanced timeline editing featuring multi-cam sync logic and premium sound curves.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show graphics">
+                <img src="https://picsum.photos/400/300?v=27" class="item-img" alt="Premium Business Card Concept">
+                <div class="item-info">
+                    <h4>Premium Business Card Framework</h4>
+                    <p>A double-sided minimal layout structure incorporating sleek typography and custom brand vectors.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show animation">
+                <img src="https://picsum.photos/400/300?v=28" class="item-img" alt="eSports Comic Storyboard Frame">
+                <div class="item-info">
+                    <h4>eSports Narrative Storyboard</h4>
+                    <p>Sequential multi-scene 2D layouts highlighting key character dynamics and dynamic posture framing.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item show vfx">
+                <img src="https://picsum.photos/400/300?v=29" class="item-img" alt="VFX Rotoscoping & Matte Elements">
+                <div class="item-info">
+                    <h4>Advanced VFX Roto-Mask Array</h4>
+                    <p>Highly complex fine hair detailing and custom multi-plate environment tracking nodes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: CONTACT VIEW -->
+    <div id="page-contact" class="page-view">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Let's Collaborate</h3>
+                <p>Have an upcoming production canvas, brand design framework, or motion sequence project? Drop your structural guidelines below or reach out directly over my verified communication nodes.</p>
+                
+                <strong>Email Address:</strong><br>
+                <a href="mailto:i.m.singhanant28@gmail.com" class="info-link">i.m.singhanant28@gmail.com</a>
+                
+                <div class="social-links">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">Behance</a>
+                    <a href="#" target="_blank">Instagram</a>
+                </div>
+            </div>
+
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Verified Email Address" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="6" placeholder="Project Specifications / Message Details" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Details</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Anant Pratap Singh. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // PAGE ROUTING CONTROLLER
+        function navigateToPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            // Remove active style from all navigation anchors
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active-nav'));
+
+            // Show current target page view & highlight button
+            document.getElementById('page-' + pageId).classList.add('active-page');
+            document.getElementById('nav-' + pageId).classList.add('active-nav');
+            
+            // Scroll right to the top seamlessly
+            window.scrollTo({top: 0});
+        }
+
+        // PORTFOLIO FILTER CONTROLLER
+        function filterPortfolio(category) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const items = document.querySelectorAll('.portfolio-item');
+            items.forEach(item => {
+                if (category === 'all') {
+                    item.classList.add('show');
+                } else if (item.classList.contains(category)) {
+                    item.classList.add('show');
+                } else {
+                    item.classList.remove('show');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
